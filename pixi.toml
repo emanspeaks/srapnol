@@ -11,7 +11,9 @@ docs-publish-raw = "doorstop publish all docs/build/req --markdown"
 docs-fix-anchors = { cmd = "python tools/fix_anchors.py docs/build/req", depends-on = ["docs-publish-raw"] }
 docs-edit-metadata = { cmd = "python tools/add_edit_metadata.py docs/build/req", depends-on = ["docs-fix-anchors"] }
 docs-publish = { depends-on = ["docs-edit-metadata"] }
-docs-serve = { cmd = "mkdocs serve --dev-addr 127.0.0.1:3000", depends-on = ["docs-publish"] }
+docs-serve = "python tools/serve_docs.py --dev-addr 127.0.0.1:3000"
+docs-watch = "python tools/watch_docs.py"
+docs-gui = "doorstop-gui"
 
 [dependencies]
 python = ">=3.14.7,<3.15"

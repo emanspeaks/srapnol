@@ -1,4 +1,4 @@
-# srapnol documentation set
+# Srapnol documentation set
 
 Controlled documentation for `srapnol`, organized per NPR 7150.2D and NASA-HDBK-2203
 (SWEHB Ver D) for Class D software maintained so Class C applications can adopt it.
@@ -62,23 +62,33 @@ Commands (from the repository root, inside the pixi environment):
 ```bash
 pixi run docs-check    # validate the tree (doorstop --no-reformat)
 pixi run docs-publish  # doorstop publish --markdown, then tools/fix_anchors.py
-pixi run docs-serve    # docs-publish, then mkdocs serve at http://127.0.0.1:3000/
+pixi run docs-serve    # tools/serve_docs.py: live-watches sources, serves at :3000
+pixi run docs-watch    # standalone: republishes docs/build/req on source changes, no serve
 ```
 
 `docs/build/` and `site/` are git-ignored. The CI workflow runs the same validation and
 publish steps and builds the site with MkDocs from `mkdocs.yml`.
 
+`mkdocs serve` alone only live-reloads on changes to `docs/build/req/*.md` (the
+*published* tree), not `docs/{sys,srs,des,tst}/*.md` (the Doorstop *sources*) — editing
+or committing an item does nothing to the served site until the "publish" pipeline
+reruns. `pixi run docs-serve` (`tools/serve_docs.py`) closes that gap itself: it runs
+`tools/watch_docs.py`'s poll-and-republish loop as a background thread in the same
+process as `mkdocs serve`, so an edit shows up without a second terminal, and Ctrl+C
+stops both together — no separate watcher process left running to remember to kill.
+Narrative docs (`SDP.md` and the rest) have no such gap; MkDocs reads them directly.
+
 Every heading Doorstop publishes carries a trailing `{#UID}` for the `attr_list`
 Markdown extension (`mkdocs.yml` enables it) to turn into a clean `id="UID"` instead of
 rendering it as literal text. Doorstop's own internal links (its per-document Table of
-Contents, and each item's parent/child links) are computed against its *un-adjusted*
+Contents, and each item's parent/child links) are computed against its *unadjusted*
 slug of the whole heading line, so `tools/fix_anchors.py` rewrites them to the clean UID
 after every publish — `pixi run docs-publish` always runs it; a bare
 `doorstop publish ... --markdown` does not.
 
 Each Software Test Report lives in `reports/` as its own file
 (`STR-YYYY-MM-DD-label.md`, from `STR-template.md`); `mkdocs.yml`'s nav lists them
-individually under Releases -> Test reports, since MkDocs' nav is static. Adding a
+individually under Releases → Test reports, since MkDocs' nav is static. Adding a
 report means adding its own nav entry alongside the others.
 
 ## Change control
