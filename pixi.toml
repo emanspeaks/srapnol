@@ -23,4 +23,5 @@ pip = ">=26.2.1,<27"
 # Versions matched to .github/workflows/docs.yml.example.
 doorstop = "==3.2"
 mkdocs = "==1.6.1"
-mkdocs-material = "==9.7.7"
+# Provides the pymdownx.arithmatex markdown extension mkdocs.yml uses for MathJax.
+pymdown-extensions = "==12.0"

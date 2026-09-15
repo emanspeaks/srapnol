@@ -13,7 +13,7 @@ exclude_docs: |
 hooks:
   - tools/mkdocs_hooks.py
 theme:
-  name: material
+  name: mkdocs
 markdown_extensions:
   - tables
   - attr_list
