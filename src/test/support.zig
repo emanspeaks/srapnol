@@ -1,5 +1,5 @@
 //! Test-rig helpers: tolerance asserts, the solve-or-skip shim, and an
-//! independent central-difference Jacobian oracle (TST-2, TST-11). Kept
+//! independent central-difference Jacobian oracle (TST-003, TST-009). Kept
 //! apart from the solver's own derivative checker so the two never share
 //! a bug.
 

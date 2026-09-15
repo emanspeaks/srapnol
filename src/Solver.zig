@@ -10,7 +10,7 @@ const Solver = @This();
 /// snOptA `Start`: cold ignores states, basis uses states, warm uses all of `State`.
 pub const Start = enum { cold, basis, warm };
 
-/// Per-variable and per-row state; values match snOptA's `xstate`/`Fstate`.
+/// Per-variable and per-row state; values match snOptA's `xstate`/`Fstate` (SRS-073).
 pub const VarState = enum(u8) {
     nonbasic_lower = 0,
     nonbasic_upper = 1,
@@ -18,7 +18,7 @@ pub const VarState = enum(u8) {
     basic = 3,
 };
 
-/// Primal/dual iterate: warm-start input and solution output (API-4).
+/// Primal/dual iterate: warm-start input and solution output (SRS-061).
 pub const State = struct {
     x: []f64,
     x_state: []VarState,
@@ -32,6 +32,7 @@ pub const State = struct {
 
     pub const InitError = error{ OutOfMemory, LengthMismatch };
 
+    /// Caller-owned (SRS-105): `init` allocates, `deinit` frees.
     pub fn init(allocator: std.mem.Allocator, problem: *const Problem, x0: []const f64) InitError!State {
         if (x0.len != problem.n) return error.LengthMismatch;
         const x = try allocator.alloc(f64, problem.n);
@@ -66,7 +67,7 @@ pub const State = struct {
     }
 };
 
-/// Termination reason; values are the snOptA `INFO` codes (API-8).
+/// Termination reason; values are the snOptA `INFO` codes (SRS-066).
 pub const Exit = enum(u8) {
     optimal = 1,
     feasible_point = 2,
@@ -102,7 +103,7 @@ pub const Exit = enum(u8) {
     }
 };
 
-/// Solve summary (API-7); the iterate itself lives in `State`.
+/// Solve summary (SRS-065); the iterate itself lives in `State`.
 pub const Result = struct {
     exit: Exit,
     /// `obj_add + F[obj_row]`; zero for feasible-point problems.
@@ -151,6 +152,7 @@ pub fn solve(self: *Solver, state: *State, start: Start) Error!Result {
     return error.NotImplemented;
 }
 
+// State construction procedure (TST-002).
 test "State.init copies x0 and zeroes everything else" {
     const testing = std.testing;
     const low = [2]f64{ -1.0, -1.0 };

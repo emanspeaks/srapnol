@@ -2,12 +2,13 @@
 //! subject to `x_low <= x <= x_upp` and `f_low <= F(x) <= f_upp`, with
 //! `F(x) = f(x) + A x`. The callback evaluates only the nonlinear part
 //! `f(x)` and its sparse Jacobian `G`; the solver adds `A x` itself.
-//! Indices are 0-based. Contract: `api.md`, requirements PRB-1..PRB-9.
+//! Indices are 0-based. Contract: `docs/SUM.md`; requirements SRS-001 and
+//! SRS section 2.1.
 
 const std = @import("std");
 const Problem = @This();
 
-/// Bounds at or beyond this magnitude are infinite (PRB-4).
+/// Bounds at or beyond this magnitude are infinite (SRS-006).
 pub const infinity: f64 = 1.0e20;
 
 /// Sparse coordinate pattern: any order, 0-based, no duplicates.
@@ -31,7 +32,7 @@ pub const Linear = struct {
     }
 };
 
-/// Where in the solve a callback happens; mirrors snOptA's `Status`.
+/// Where in the solve a callback happens; mirrors snOptA's `Status` (SRS-020).
 pub const Status = enum {
     /// First call; a good place for one-time setup.
     first,
@@ -41,9 +42,9 @@ pub const Status = enum {
 };
 
 pub const EvalError = error{
-    /// `f` is undefined at `x`; the solver retries with a shorter step.
+    /// `f` is undefined at `x`; the solver retries with a shorter step (SRS-022).
     Undefined,
-    /// Stop the solve; reported as `Exit.user_terminated`.
+    /// Stop the solve; reported as `Exit.user_terminated` (SRS-024).
     Abort,
 };
 
@@ -80,7 +81,7 @@ eval: EvalFn,
 ctx: ?*anyopaque = null,
 name: []const u8 = "",
 
-/// Adapts a typed `fn (*Ctx, Request) EvalError!void` to `EvalFn`.
+/// Adapts a typed `fn (*Ctx, Request) EvalError!void` to `EvalFn` (SRS-075).
 pub fn wrap(comptime Ctx: type, comptime func: anytype) EvalFn {
     return struct {
         fn thunk(ctx: ?*anyopaque, req: Request) EvalError!void {
@@ -94,7 +95,7 @@ pub fn evaluate(self: *const Problem, x: []const f64, f: ?[]f64, g: ?[]f64, stat
     return self.eval(self.ctx, .{ .x = x, .f = f, .g = g, .status = status });
 }
 
-/// `f += A x`; turns the callback's `f(x)` into the full `F(x)`.
+/// `f += A x`; turns the callback's `f(x)` into the full `F(x)` (SRS-005).
 pub fn addLinear(self: *const Problem, x: []const f64, f: []f64) void {
     for (self.a.rows, self.a.cols, self.a.vals) |i, j, v| f[i] += v * x[j];
 }
@@ -116,7 +117,7 @@ pub const ValidateError = error{
     OutOfMemory,
 };
 
-/// Structural checks (PRB-7). Scratch space is only for the duplicate scan.
+/// Structural checks (SRS-009). Scratch space is only for the duplicate scan.
 pub fn validate(self: *const Problem, allocator: std.mem.Allocator) ValidateError!void {
     if (self.n == 0) return error.NoVariables;
     if (self.nf == 0) return error.NoFunctions;
@@ -158,7 +159,7 @@ fn checkBounds(low: []const f64, upp: []const f64) ValidateError!void {
 }
 
 // ---------------------------------------------------------------------------
-// Validation tests (TST-9). A 2x2 skeleton with a no-op callback.
+// Validation procedure (TST-001). A 2x2 skeleton with a no-op callback.
 
 const testing = std.testing;
 

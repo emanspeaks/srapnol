@@ -38,4 +38,9 @@ pub fn build(b: *std.Build) !void {
 
     const run_step = b.step("run", "Run the program");
     run_step.dependOn(run_cmd_step);
+
+    const tests = b.addTest(.{ .root_module = mod });
+    const run_tests = b.addRunArtifact(tests);
+    const test_step = b.step("test", "Run srapnol's unit tests");
+    test_step.dependOn(&run_tests.step);
 }

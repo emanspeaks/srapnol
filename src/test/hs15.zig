@@ -2,7 +2,7 @@
 //! interface): the Rosenbrock objective with `x1 x2 >= 1`, `x1 + x2^2 >= 0`
 //! and `x1 <= 0.5`. The start (-2, 1) violates the first row; the optimum
 //! (0.5, 2) has that row and the bound active, with objective 306.5.
-//! Row 2 keeps its linear term in `A` (TST-7).
+//! Row 2 keeps its linear term in `A` (TST-014).
 
 const srapnol = @import("../__root__.zig");
 const support = @import("support.zig");

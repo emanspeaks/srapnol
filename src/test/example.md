@@ -74,7 +74,7 @@ Only one stress constraint binds at the optimum, so this exercises inequality ac
 
 ## 6. Mapping to the srapnol API
 
-`srapnol` is 0-based (see `api.md`), so the snopta layout in section 4 becomes:
+`srapnol` is 0-based (see `docs/SUM.md`), so the snopta layout in section 4 becomes:
 
 * `n = 2`, `nf = 4`, `obj_row = 0`
 * `a.rows = [0, 0]`, `a.cols = [0, 1]`, `a.vals = [2√2 ρH, ρH]`

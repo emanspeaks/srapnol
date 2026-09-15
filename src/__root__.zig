@@ -1,10 +1,10 @@
 //! `srapnol`: a sparse nonlinear optimizer with an snOptA-style problem
 //! interface (`F(x) = f(x) + A x`, bounds on `x` and `F`), written in Zig.
-//! Requirements live in `requirements.md`, the API contract in `api.md`,
-//! the algorithm design in `theory.md`, and the build-out order in
-//! `roadmap.md`. Run the test rig standalone with
-//! `zig test src/linalg/srapnol/__root__.zig`; the end-to-end solve tests
-//! skip until `Solver.solve` is implemented.
+//! The public surface (SRS-057): `Problem`, `Options`, `Solver`, `State`,
+//! `Result`, `Exit`, `Start`, `VarState`, `infinity`, and `solve`. The
+//! documentation set lives in `docs/` (start at `docs/README.md`). Run the
+//! test rig with `zig build test`; the end-to-end solve tests skip until
+//! `Solver.solve` is implemented.
 
 const std = @import("std");
 
@@ -29,7 +29,7 @@ pub const VarState = Solver.VarState;
 /// Bounds at or beyond this magnitude are treated as infinite.
 pub const infinity: f64 = Problem.infinity;
 
-/// One-shot convenience: validate, allocate a workspace, cold-start solve, free.
+/// One-shot convenience (SRS-074): validate, allocate a workspace, cold-start solve, free.
 pub fn solve(allocator: std.mem.Allocator, problem: *const Problem, options: Options, state: *State) Solver.Error!Result {
     var solver = try Solver.init(allocator, problem, options);
     defer solver.deinit();

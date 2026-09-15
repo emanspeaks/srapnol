@@ -1,0 +1,28 @@
+settings:
+  digits: 3
+  prefix: DES
+  sep: '-'
+  itemformat: markdown
+  parent: SRS
+attributes:
+  defaults:
+    doc:
+      name: "DES"
+      title: "Software Design Description for srapnol"
+      ref: "SRAPNOL-DES"
+      by: 'Randy Eckman'
+      major: '0'
+      minor: '1'
+      copyright: 'Public domain'
+    category: ''
+    verification-method: ''
+    status: ''
+    rationale: ''
+  reviewed:
+  - category
+  - verification-method
+  publish:
+  - category
+  - verification-method
+  - status
+  - rationale

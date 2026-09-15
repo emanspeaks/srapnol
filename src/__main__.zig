@@ -1,11 +1,11 @@
 const std = @import("std");
-const root = @import("root");
 const builtin = @import("builtin");
+const build_options = @import("build_options");
 
 const rstd = @import("rstd");
 
 const app_name = "srapnol-test";
-const version = root.version;
+const version = build_options.version;
 
 pub fn main(init: rstd.zigstd.MainInit) !void {
     // const allocator = init.gpa;

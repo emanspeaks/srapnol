@@ -1,0 +1,27 @@
+settings:
+  digits: 3
+  prefix: SYS
+  sep: '-'
+  itemformat: markdown
+attributes:
+  defaults:
+    doc:
+      name: "SYS"
+      title: "System Requirements and Stakeholder Needs for srapnol"
+      ref: "SRAPNOL-SYS"
+      by: 'Randy Eckman'
+      major: '0'
+      minor: '1'
+      copyright: 'Public domain'
+    category: ''
+    verification-method: ''
+    status: ''
+    rationale: ''
+  reviewed:
+  - category
+  - verification-method
+  publish:
+  - category
+  - verification-method
+  - status
+  - rationale

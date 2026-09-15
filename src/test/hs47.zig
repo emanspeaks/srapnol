@@ -2,7 +2,7 @@
 //! variables, three equality rows mixing linear (`A`) and nonlinear (`G`)
 //! terms, objective in the last row. Solution: all ones, objective 0.
 //! The objective is quartic along some feasible directions, so `x` is
-//! only pinned to 1e-2 while the objective and rows are tight (TST-6).
+//! only pinned to 1e-2 while the objective and rows are tight (TST-013).
 
 const std = @import("std");
 const srapnol = @import("../__root__.zig");

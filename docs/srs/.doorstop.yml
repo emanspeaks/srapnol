@@ -1,0 +1,28 @@
+settings:
+  digits: 3
+  prefix: SRS
+  sep: '-'
+  itemformat: markdown
+  parent: SYS
+attributes:
+  defaults:
+    doc:
+      name: "SRS"
+      title: "Software Requirements Specification for srapnol"
+      ref: "SRAPNOL-SRS"
+      by: 'Randy Eckman'
+      major: '0'
+      minor: '1'
+      copyright: 'Public domain'
+    category: ''
+    verification-method: ''
+    status: ''
+    rationale: ''
+  reviewed:
+  - category
+  - verification-method
+  publish:
+  - category
+  - verification-method
+  - status
+  - rationale

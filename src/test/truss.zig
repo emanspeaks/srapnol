@@ -1,5 +1,5 @@
 //! Three-bar truss sizing problem from `example.md`: the primary
-//! acceptance case (TST-1..TST-4). Two areas, a linear weight objective
+//! acceptance case (TST-008 to TST-011). Two areas, a linear weight objective
 //! held in `A`, and three two-sided nonlinear stress rows in `G`.
 
 const std = @import("std");

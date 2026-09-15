@@ -1,5 +1,5 @@
 //! Solver options. Defaults follow SNOPT 7 where a counterpart exists;
-//! `api.md` maps each field to its SNOPT keyword (API-6).
+//! `docs/data-dictionary.md` maps each field to its SNOPT keyword (SRS-063).
 
 const std = @import("std");
 

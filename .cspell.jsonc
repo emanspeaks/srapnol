@@ -35,5 +35,8 @@
     "/-i.*/",
     "/-I.*/",
     "/-f.*/",
+    // Doorstop base64url SHA256 fingerprints (`reviewed:` and link hashes in
+    // docs/{sys,srs,des,tst} item front matter): preceded by `: `, always end in one `=`.
+    "/(?<=: )[A-Za-z0-9_-]{25,}=+/",
   ],
 }

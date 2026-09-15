@@ -1,0 +1,45 @@
+site_name: srapnol
+site_description: NPR 7150.2D documentation set for the srapnol nonlinear optimizer
+repo_url: https://github.com/emanspeaks/srapnol
+docs_dir: docs
+site_dir: site
+strict: false
+exclude_docs: |
+  sys/
+  srs/
+  des/
+  tst/
+  build/index.md
+theme:
+  name: material
+markdown_extensions:
+  - tables
+  - attr_list
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+nav:
+  - Overview: README.md
+  - Requirements:
+      - System requirements (SYS): build/req/SYS.md
+      - Software Requirements Specification (SRS): build/req/SRS.md
+      - Software Design Description (DES): build/req/DES.md
+      - Software Test Procedures (TST): build/req/TST.md
+  - Plans:
+      - Software Development/Management Plan: SDP.md
+      - Requirements mapping matrix: compliance-matrix.md
+      - Software Test Plan: STP.md
+      - Software Maintenance Plan: maintenance-plan.md
+  - Descriptions:
+      - Interface Design Description (C ABI): IDD.md
+      - Software Data Dictionary: data-dictionary.md
+      - Software User Manual: SUM.md
+  - Releases:
+      - Version Description Document: VDD.md
+      - Software Test Report template: STR-template.md
+      - Test reports:
+          - Phase 0 baseline (2026-09-15): reports/STR-2026-09-15-phase0.md

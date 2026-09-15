@@ -1,0 +1,57 @@
+name: Change request
+description: Request a new feature or a change to requirements, design, or documentation (NASA-HDBK-2203 5.01; SWE-053, SWE-080)
+title: "[CR] "
+labels: ["change-request"]
+body:
+  - type: input
+    id: item
+    attributes:
+      label: Software item and version
+      description: What the change applies to (module, document, requirement UID) and the current version.
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Requested change and justification
+      description: What should change, why, and the stakeholder need it serves (SYS item if known).
+    validations:
+      required: true
+  - type: input
+    id: originator
+    attributes:
+      label: Originator
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority (originator's assessment)
+      options:
+        - High
+        - Major
+        - Low
+    validations:
+      required: true
+  - type: input
+    id: date
+    attributes:
+      label: Date requested
+      placeholder: YYYY-MM-DD
+  - type: input
+    id: requirements
+    attributes:
+      label: Requirements affected
+      placeholder: SRS-063 (new option), TST-012
+  - type: textarea
+    id: safety
+    attributes:
+      label: Safety-related considerations
+      description: Normally "none".
+  - type: markdown
+    attributes:
+      value: |
+        Maintainer fields, filled on triage: life-cycle phase, assigned implementer,
+        disposition (approved, deferred, declined with reason), affected SRS/DES/TST items,
+        status (new, analysis, approved, implemented, tested, closed). Closure references the
+        pull request and the re-reviewed Doorstop items.

@@ -10,5 +10,7 @@
     "allowed_elements": [
       "br"
     ]
-  }
+  },
+  // Doorstop rewrites the docs/{sys,srs,des,tst} item files without a trailing newline.
+  "MD047": false
 }

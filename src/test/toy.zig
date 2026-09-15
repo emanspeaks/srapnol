@@ -3,7 +3,7 @@
 //! Solution (0, -1), objective -1, with both rows and the bound active;
 //! a degenerate vertex, so only primal values are asserted. Three layouts
 //! share one callback: objective row in `G` as in the original, objective
-//! row moved to `A`, and feasible-point-only (TST-5).
+//! row moved to `A`, and feasible-point-only (TST-012).
 
 const srapnol = @import("../__root__.zig");
 const support = @import("support.zig");

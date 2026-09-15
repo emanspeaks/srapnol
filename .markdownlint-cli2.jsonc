@@ -1,5 +1,14 @@
 {
   "ignores": [
     // "private/**/*",
+    "docs/build/**",
+    "site/**",
+    // "vendor/**",
+    "node_modules/**",
+    ".pixi/**",
+    // toolchain caches, not repository content
+    "zig-pkg/**",
+    ".zig-cache/**",
+    "zig-out/**",
   ]
 }

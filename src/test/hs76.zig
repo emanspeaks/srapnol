@@ -1,7 +1,7 @@
 //! Hock-Schittkowski 76 (snopt7-examples `hs76.f`): a convex QP in four
 //! variables with three linear rows, all in `A`, and the quadratic
 //! objective in `G`. Exact solution (3, 23, 0, 6)/11, objective -103/22,
-//! with row 1 at its upper bound and `x3` at its lower bound (TST-8).
+//! with row 1 at its upper bound and `x3` at its lower bound (TST-015).
 
 const srapnol = @import("../__root__.zig");
 const support = @import("support.zig");

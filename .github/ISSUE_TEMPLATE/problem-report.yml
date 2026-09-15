@@ -1,0 +1,83 @@
+name: Problem report
+description: Report a defect or non-conformance (NASA-HDBK-2203 5.01; SWE-201, SWE-202)
+title: "[PR] "
+labels: ["problem-report"]
+body:
+  - type: input
+    id: item
+    attributes:
+      label: Software item and version
+      description: Configuration item (module, document, test) and version or commit.
+      placeholder: src/Solver.zig at v0.1.0 / commit abc1234
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Problem description
+      description: Steps to reproduce, data entered, expected result, actual result.
+    validations:
+      required: true
+  - type: input
+    id: originator
+    attributes:
+      label: Originator
+      description: Name, organization, contact (a GitHub handle is enough).
+    validations:
+      required: true
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity (originator's assessment)
+      description: High = wrong result or crash on valid input; Major = wrong exit, missing feature, or documentation error that misleads; Low = cosmetic or diagnostic-only.
+      options:
+        - High
+        - Major
+        - Low
+    validations:
+      required: true
+  - type: input
+    id: date
+    attributes:
+      label: Date discovered
+      placeholder: YYYY-MM-DD
+    validations:
+      required: true
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Life-cycle phase in which the problem was found
+      options:
+        - Requirements
+        - Design
+        - Implementation
+        - Test
+        - Release / operations
+        - Maintenance
+  - type: input
+    id: configuration
+    attributes:
+      label: System and software configuration
+      description: Platform, Zig version, rstd commit, build mode, options in effect.
+  - type: textarea
+    id: workaround
+    attributes:
+      label: Workaround
+      description: Steps that avoid the problem, if any.
+  - type: textarea
+    id: safety
+    attributes:
+      label: Safety-related considerations
+      description: Normally "none" (not safety-critical); note any host-safety impact you see.
+  - type: input
+    id: requirements
+    attributes:
+      label: Requirements affected
+      description: SRS/TST identifiers, if known.
+      placeholder: SRS-009, TST-001
+  - type: markdown
+    attributes:
+      value: |
+        Maintainer fields, filled on triage: assigned investigator, disposition, corrective
+        action and changed items, status (new, analysis, assigned, implemented, tested,
+        closed). Closure references the pull request.

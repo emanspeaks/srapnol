@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation site
+    url: https://emanspeaks.github.io/srapnol/
+    about: Requirements, design, test procedures, and plans published from main.

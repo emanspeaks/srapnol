@@ -7,6 +7,33 @@ Guidance for AI coding agents (and humans) working in this repository.
 - `zig` is not on `PATH` in this environment. The self-built toolchain lives at
   `C:\scratch\git\zig-build\bin\stage4\bin\zig.exe` (std lib at `C:\scratch\git\zig-build\lib\std`);
   invoke it by full path.
+- `zig build test` runs the suite (a bare `zig test src/__root__.zig` cannot resolve the
+  `rstd` and `build_options` imports).
+- Python tooling (Doorstop, MkDocs) runs in a pixi environment; see `pixi.toml`.
+
+## Dependencies
+
+Never run a command that downloads or installs software without asking first and
+getting explicit confirmation — package managers included (`pixi install`,
+`pip install`, `npm install` for a new package, etc.), even when scoped to a
+project-local environment (e.g. `.pixi/envs`) and even when it seems clearly implied
+by the task at hand. This includes editing a manifest (`pixi.toml`, `package.json`,
+`build.zig.zon`) to add a new dependency and then syncing it.
+
+## Documentation and requirements
+
+- Requirements, design, and test procedures are Doorstop trees under `docs/sys`,
+  `docs/srs`, `docs/des`, and `docs/tst`, one Markdown item per file; plans and
+  descriptions are Markdown documents in `docs/`. `docs/README.md` is the register and
+  explains the conventions. Never edit `docs/build/` or `site/` (generated, git-ignored).
+- Numeric UIDs (`SRS-001`) are requirements; word UIDs (`SRS-PRB`) are headings and notes.
+  Code that fulfils a requirement cites its UID in the doc comment of the fulfilling
+  declaration; test files cite their procedure (`TST-001`). Doorstop `references` on
+  SRS items check those citations, so never remove or rename one without updating the item.
+- After editing items run `pixi run docs-check` (Doorstop validation). After reviewing a
+  changed item run `pixi run doorstop review <UID>`; after re-examining children of a
+  changed parent run `pixi run doorstop clear <UID>`.
+- A requirement change starts as a change-request issue and updates SRS/DES/TST before code.
 
 ## Markdown
 

@@ -1,0 +1,28 @@
+settings:
+  digits: 3
+  prefix: TST
+  sep: '-'
+  itemformat: markdown
+  parent: SRS
+attributes:
+  defaults:
+    doc:
+      name: "TST"
+      title: "Software Test Procedures for srapnol"
+      ref: "SRAPNOL-TST"
+      by: 'Randy Eckman'
+      major: '0'
+      minor: '1'
+      copyright: 'Public domain'
+    category: ''
+    verification-method: ''
+    status: ''
+    rationale: ''
+  reviewed:
+  - category
+  - verification-method
+  publish:
+  - category
+  - verification-method
+  - status
+  - rationale

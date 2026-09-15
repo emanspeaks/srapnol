@@ -6,7 +6,19 @@ platforms = ["win-64"]
 version = "0.1.0"
 
 [tasks]
+docs-check = "doorstop --no-reformat"
+docs-publish-raw = "doorstop publish all docs/build/req --markdown"
+docs-fix-anchors = { cmd = "python tools/fix_anchors.py docs/build/req", depends-on = ["docs-publish-raw"] }
+docs-edit-metadata = { cmd = "python tools/add_edit_metadata.py docs/build/req", depends-on = ["docs-fix-anchors"] }
+docs-publish = { depends-on = ["docs-edit-metadata"] }
+docs-serve = { cmd = "mkdocs serve --dev-addr 127.0.0.1:3000", depends-on = ["docs-publish"] }
 
 [dependencies]
 python = ">=3.14.7,<3.15"
 pip = ">=26.2.1,<27"
+
+[pypi-dependencies]
+# Versions matched to .github/workflows/docs.yml.example.
+doorstop = "==3.2"
+mkdocs = "==1.6.1"
+mkdocs-material = "==9.7.7"
