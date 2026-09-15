@@ -1,0 +1,19 @@
+.{
+    .name = .srapnol,
+    // .fingerprint = 0xc73c6fcafd0e312e,
+    .version = "0.1.0",
+    // .minimum_zig_version = "0.17.0-dev.203",
+    .dependencies = .{
+        .rstd = .{ .path = "vendor/rstd" },
+        // .rgui = .{ .path = "vendor/rgui" },
+    },
+
+    // package hash is computed from files in .paths
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "build",
+        "src",
+        "LICENSE",
+    },
+}

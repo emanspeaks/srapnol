@@ -1,0 +1,10 @@
+# Zig
+.zig-cache/
+zig-out/
+*.o
+zig-pkg/
+.zigversion
+
+# pixi environments
+.pixi/*
+!.pixi/config.toml

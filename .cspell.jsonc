@@ -1,0 +1,38 @@
+{
+  "version": "0.2",
+  "ignorePaths": [
+    ".cspell.json*",
+    ".cspell/**",
+    ".git/**",
+    "*.code-workspace",
+    ".gitignore",
+    ".local-gitignore",
+    "cache/**",
+    ".env",
+    "go.sum",
+  ],
+  "dictionaryDefinitions": [
+    {
+      "name": "project-words",
+      "path": ".vscode/ltex.dictionary.en-US.txt",
+      "addWords": true
+    }
+  ],
+  "dictionaries": [
+    "bash",
+    "win32",
+    "scientific-terms-us",
+    "zig",
+    "project-words"
+  ],
+  "allowCompoundWords": true,
+  "ignoreWords": [],
+  "ignoreRegExpList": [
+    "/-W.*/",
+    "/-D.*/",
+    "/-X.*/",
+    "/-i.*/",
+    "/-I.*/",
+    "/-f.*/",
+  ],
+}

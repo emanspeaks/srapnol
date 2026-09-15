@@ -1,0 +1,24 @@
+# EditorConfig is awesome: https://editorconfig.org
+
+# top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+charset = utf-8
+
+[*.{py,zig,zig.zon}]
+indent_size = 4
+
+# Go files use tabs — gofmt enforces this and will revert spaces
+[*.go]
+indent_style = tab
+
+# go.mod and go.sum are managed by the Go toolchain (tabs required)
+[go.{mod,sum}]
+indent_style = tab

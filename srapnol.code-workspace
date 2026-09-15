@@ -1,0 +1,166 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+			"**/node_modules/**": true,
+      "**/.zig-cache/**": true,
+      "**/zig-pkg/**": true,
+			"**/zig-cache*/**": true,
+      "**/*.ziggy-schema": true,
+      "**/zine.exe": true,
+    },
+    "files.watcherExclude": {
+			"**/node_modules/**": true,
+      "**/.zig-cache/**": true,
+      "**/zig-pkg/**": true,
+			"**/zig-cache*/**": true,
+    },
+    "lldb.launch.initCommands": [
+      "command script import ${workspaceFolder}/zig-src/tools/lldb_pretty_printers.py",
+      "type category enable zig",
+      "type category enable zig.lang",
+      "type category enable zig.std",
+      "type category enable zig.stage2"
+    ],
+    "files.associations": {
+      "VERSION": "plaintext",
+      ".local-gitignore": "gitignore",
+      ".github/workflows/exempt.txt": "gitignore",
+      ".clangd": "yaml",
+    },
+    "terminal.integrated.automationProfile.windows": {
+      "path": "C:\\windows\\system32\\cmd.exe",
+    },
+    "ltex.additionalRules.motherTongue": "en-US",
+    "zig.zls.enabled": "on",
+    "zig.zls.inlayHintsShowParameterName": false,
+    "zig.zls.inlayHintsExcludeSingleArgument": false,
+    "zig.zls.inlayHintsShowBuiltin": false,
+    "zig.zls.inlayHintsShowStructLiteralFieldType": false,
+    "zig.zls.inlayHintsShowVariableTypeHints": false,
+    "zig.zls.warnStyle": true,
+    "debug.onTaskErrors": "abort",  // will switch to problems pane otherwise
+    "zig.zls.enableArgumentPlaceholders": false,
+    "editor.semanticTokenColorCustomizations": {
+      "rules": {
+        "*.deprecated": {
+          // highlight semantic tokens that are marked as "deprecated"
+          "strikethrough": true
+        },
+      },
+    },
+
+    // for C deps we will compile with Zig that have CMakeLists in their repos
+    "cmake.ignoreCMakeListsMissing": true,
+
+    // CodeLLDB settings - never got this to work properly.
+    // // "lldb.library": "",
+    // "lldb.displayFormat": "auto",
+    // "lldb.showDisassembly": "auto",
+    // "lldb.dereferencePointers": true,
+    // "zig.debugAdapter": "lldb",
+
+    "zig.path": "C:/scratch/git/zig-build/bin/stage4/bin/zig.exe",
+    "zig.zls.path": "C:/scratch/git/zig-build/bin/zls/bin/zls.exe",
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+  //     // {
+	// 		// 	"label": "zig build (lldb)",
+	// 		// 	"type": "shell",
+	// 		// 	"command": "zig",
+	// 		// 	"args": [
+	// 		// 		"build",
+  //     //     "-Dlldb",
+	// 		// 	],
+	// 		// 	"group": {
+	// 		// 		"kind": "build",
+	// 		// 		"isDefault": true
+	// 		// 	},
+	// 		// 	"problemMatcher": []
+	// 		// },
+      {
+        "label": "zig build",
+        "type": "shell",
+        "command": "${config:zig.path}",
+				"args": [
+					"build",
+				],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "problemMatcher": [],
+        "presentation": {
+          "clear": true,
+          "reveal": "always",
+          "panel": "shared",
+          "focus": true,
+          "revealProblems": "never",
+        },
+      },
+    ]
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      // {
+			// 	"name": "Debug (lldb)",
+			// 	"type": "lldb",
+			// 	"request": "launch",
+			// 	"program": "${workspaceFolder}/zig-out/bin/rgui.exe",
+			// 	// "program": "zig",
+			// 	"args": [
+      //     // "build",
+      //     // "run",
+      //     // "--",
+			// 		"--debug",
+			// 	],
+			// 	"cwd": "${workspaceFolder}",
+			// 	"preLaunchTask": "zig build (lldb)",
+      //   "terminal": "integrated",
+      //   "initCommands": [
+      //     "command script import ${workspaceFolder}/lldb_pretty_printers.py",
+      //     "type category enable zig.lang zig.std zig",
+      //   ]
+			// },
+			{
+				"name": "Debug (cppvsdbg)",
+				"type": "cppvsdbg",
+				"request": "launch",
+				// "program": "${workspaceFolder}/zig-out/bin/rgui.exe",
+        // "args": [
+				// 	"--debug",
+				// ],
+				// "program": "zig",
+				"program": "${config:zig.path}",
+				"args": [
+          "build",
+          "run",
+          // "--",
+					// "--debug",
+				],
+				"cwd": "${workspaceFolder}",
+				"preLaunchTask": "zig build",
+				"console": "integratedTerminal",
+			}
+    ],
+    "compounds": []
+  },
+  "extensions": {
+    "recommendations": [
+      "ziglang.vscode-zig",
+      "ms-vscode.cpptools",  // windows debug
+      // "vadimcn.vscode-lldb",  // posix debug
+      "streetsidesoftware.code-spell-checker",
+      "streetsidesoftware.code-spell-checker-scientific-terms",
+      "streetsidesoftware.code-spell-checker-win32",
+      "ltex-plus.vscode-ltex-plus",
+    ]
+  }
+}
