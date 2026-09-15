@@ -1,0 +1,3 @@
+[submodule "vendor/rstd"]
+	path = vendor/rstd
+	url = https://codeberg.org/randyos/rstd.git

@@ -1,0 +1,12 @@
+[workspace]
+authors = ["Randy Eckman <emanspeaks@gmail.com>"]
+channels = ["conda-forge"]
+name = "srapnol"
+platforms = ["win-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+python = ">=3.14.7,<3.15"
+pip = ">=26.2.1,<27"

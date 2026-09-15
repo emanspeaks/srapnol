@@ -1,6 +1,6 @@
 .{
     .name = .srapnol,
-    // .fingerprint = 0xc73c6fcafd0e312e,
+    .fingerprint = 0x2d43fb52de2942e8,
     .version = "0.1.0",
     // .minimum_zig_version = "0.17.0-dev.203",
     .dependencies = .{

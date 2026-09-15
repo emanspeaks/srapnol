@@ -10,6 +10,7 @@
     "cache/**",
     ".env",
     "go.sum",
+    "pixi.lock",
   ],
   "dictionaryDefinitions": [
     {
