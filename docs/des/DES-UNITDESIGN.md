@@ -14,5 +14,5 @@ Unit-level design is carried in the doc comments of each module as the implement
 phases land; each declaration that fulfils a requirement cites its SRS identifier, and
 Doorstop `references` on the SRS items resolve to those citations. Algorithms are
 specified above at the level needed to code and test them; parameter choices (EXPAND
-frequency, refactorization interval, `mu = 1e-4`, elastic weight growth factor) are
-constants in the module that owns them.
+frequency, refactorization interval, \(\mu = 10^{-4}\), elastic weight growth factor)
+are constants in the module that owns them.

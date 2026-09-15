@@ -12,3 +12,9 @@ zig-pkg/
 # generated documentation
 docs/build/
 site/
+
+# python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd

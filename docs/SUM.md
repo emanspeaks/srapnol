@@ -28,8 +28,9 @@ minimize    F[obj_row](x) + obj_add
 subject to  x_low <= x <= x_upp,   f_low <= F(x) <= f_upp,   F(x) = f(x) + A x
 ```
 
-with `x` in `R^n`, `F` in `R^nf`, a constant sparse `A` given as triplets, and a
-user-supplied `f` with sparse Jacobian `G`. The interface is modelled on `snOptA`; the
+with \(x\) in \(\mathbb{R}^n\), \(F\) in \(\mathbb{R}^{n_f}\), a constant sparse \(A\)
+given as triplets, and a user-supplied \(f\) with sparse Jacobian \(G\). The interface
+is modelled on `snOptA`; the
 method is sequential quadratic programming with an active-set, reduced-Hessian QP
 solver (Gill, Murray, Saunders 2005).
 
@@ -149,7 +150,7 @@ Rules:
 
 - Write `f` only if `req.f` is non-null and `g` only if `req.g` is non-null. Rows that
   are entirely linear get `0` in `f`.
-- Never add `A x`; the solver does. The test rig's Jacobian oracle treats a nonzero
+- Never add \(Ax\); the solver does. The test rig's Jacobian oracle treats a nonzero
   difference at an `A` slot as an error.
 - Return `error.Undefined` when `x` is outside the domain of `f`; the solver backs off.
   Return `error.Abort` to stop; the exit is `user_terminated`.
@@ -229,8 +230,9 @@ Start modes:
 
 Conventions: `VarState` is `nonbasic_lower` (0), `nonbasic_upper` (1), `superbasic`
 (2), `basic` (3), the same integers as snOptA. Multiplier signs for minimization:
-`>= 0` at a lower bound, `<= 0` at an upper bound, so that
-`grad F_obj = sum over i != obj_row of f_mul[i] grad F_i + x_mul` at a solution;
+\(\ge 0\) at a lower bound, \(\le 0\) at an upper bound, so that
+\(\nabla F_{\texttt{obj\_row}} = \sum_{i \ne \texttt{obj\_row}} \texttt{f\_mul}[i]\,
+\nabla F_i + \texttt{x\_mul}\) at a solution;
 `f_mul[obj_row]` is 0. `State.init(allocator, &problem, x0)` copies `x0` and zeroes the
 rest; `deinit(allocator)` frees.
 

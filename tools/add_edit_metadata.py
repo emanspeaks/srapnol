@@ -1,46 +1,39 @@
 """Insert last-changed-by/when metadata into published Doorstop items from git.
 
 Doorstop tracks no per-item author or date -- only a content fingerprint. This adds
-a "*Last changed: YYYY-MM-DD by Author*" line under each item's heading, read from
-the git history of that item's own source file (docs/sys/UID.md etc.), the only
-place this project actually records who changed a requirement and when. An item
-never committed gets no line -- git has no history for it yet.
+a "*Last changed: YYYY-MM-DD by Author (abc1234)*" line under each item's heading,
+read from the git history of that item's own source file (docs/sys/UID.md etc.), the
+only place this project actually records who changed a requirement and when. An item
+never committed gets no line -- git has no history for it yet. The abbreviated hash
+links to the commit on the hosting site (GitHub, GitLab, Gitea/Codeberg, ...),
+detected from the `origin` remote URL; if the remote is missing or unrecognized, the
+hash is shown as plain text instead.
+
+The same per-*document* metadata (not per-item) is added to the narrative docs by the
+MkDocs build hook in tools/mkdocs_hooks.py.
 
 Usage: python tools/add_edit_metadata.py <published-dir>
 """
 
 import re
-import subprocess
 import sys
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from git_metadata import REPO_ROOT, last_change, resolve_remote  # noqa: E402
+
 SOURCE_DIRS = ["sys", "srs", "des", "tst"]
-HEADING = re.compile(r"^(#{1,6} .*\{#([\w-]+)\})\s*$", re.MULTILINE)
-
-
-def last_change(path: Path) -> str | None:
-    """"YYYY-MM-DD by Author", from the last commit touching `path`, or None."""
-    result = subprocess.run(
-        ["git", "log", "-1", "--format=%ad%x09%an", "--date=short", "--", str(path)],
-        cwd=REPO_ROOT,
-        capture_output=True,
-        text=True,
-        check=True,
-    )
-    line = result.stdout.strip()
-    if not line:
-        return None
-    date, author = line.split("\t", 1)
-    return f"*Last changed: {date} by {author}*"
+HEADING = re.compile(r"^(#{1,6} .*\{#([\w-]+)\})[ \t]*$", re.MULTILINE)
 
 
 def main() -> None:
     root = Path(sys.argv[1])
+    remote = resolve_remote()
+
     metadata: dict[str, str] = {}
     for sub in SOURCE_DIRS:
         for path in sorted((REPO_ROOT / "docs" / sub).glob("*.md")):
-            note = last_change(path)
+            note = last_change(path, remote)
             if note:
                 metadata[path.stem] = note
 
@@ -57,7 +50,8 @@ def main() -> None:
             changed += 1
 
     print(
-        f"add_edit_metadata: {len(metadata)} items with git history, "
+        f"add_edit_metadata: {len(metadata)} items with git history "
+        f"({'linked to ' + remote[0] if remote else 'no recognized remote, hash unlinked'}), "
         f"updated {changed} files"
     )
 
