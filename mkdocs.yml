@@ -1,6 +1,8 @@
 site_name: srapnol
 site_description: NPR 7150.2D documentation set for the srapnol nonlinear optimizer
 repo_url: https://github.com/emanspeaks/srapnol
+# Without this, MkDocs auto-builds a per-page "Edit on GitHub" link
+edit_uri: ''
 docs_dir: docs
 site_dir: site
 strict: false
